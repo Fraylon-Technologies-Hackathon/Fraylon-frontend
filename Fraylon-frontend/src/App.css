@@ -1,0 +1,15 @@
+/* Full width root container */
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Optional: smooth scrolling for modern UI */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Remove default margins */
+body {
+  margin: 0;
+}
