@@ -1,3 +1,9 @@
+const scrollToThemes = () => {
+  const section = document.getElementById("themes");
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth" });
+  }
+};
 import { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import {
@@ -137,6 +143,7 @@ const HeroSection = () => {
               {/* Explore Button */}
               <Button
                 size="lg"
+                onClick={scrollToThemes}
                 className="h-12 px-8 rounded-xl font-semibold 
     bg-surface border border-primary/30 
     text-primary hover:bg-primary hover:text-white 
