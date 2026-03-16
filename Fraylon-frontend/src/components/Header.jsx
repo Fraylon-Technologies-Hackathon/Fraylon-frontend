@@ -8,12 +8,30 @@ const Header = () => {
           HACKSPHERE
         </span>
         <div className="hidden md:flex items-center gap-6 text-sm font-medium">
-          <span className="flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">
-            About 
-          </span>
-          <span className="cursor-pointer hover:text-primary transition-colors">Hackathons</span>
-          <span className="cursor-pointer hover:text-primary transition-colors">Projects</span>
-          <span className="cursor-pointer hover:text-primary transition-colors">Blog</span>
+          <a
+            href="#about"
+            className="flex items-center gap-1 cursor-pointer hover:text-primary transition-colors"
+          >
+            About
+          </a>
+          <a
+            href="#hackathons"
+            className="cursor-pointer hover:text-primary transition-colors"
+          >
+            Hackathons
+          </a>
+          <a
+            href="#projects"
+            className="cursor-pointer hover:text-primary transition-colors"
+          >
+            Projects
+          </a>
+          <a
+            href="#blog"
+            className="cursor-pointer hover:text-primary transition-colors"
+          >
+            Blog
+          </a>
         </div>
       </div>
       <div className="flex items-center gap-5">
