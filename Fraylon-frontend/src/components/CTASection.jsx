@@ -49,6 +49,7 @@ const CTASection = () => {
 
             <Button
               size="lg"
+              
               className="h-12 sm:h-13 px-8 sm:px-10 rounded-xl text-sm sm:text-base 
               bg-gradient-to-r from-primary to-purple-500 
               hover:opacity-90 transition-all duration-300"

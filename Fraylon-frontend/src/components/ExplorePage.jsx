@@ -6,7 +6,6 @@ const themeData = {
   "ai-ml": {
     title: "Artificial Intelligence & Machine Learning",
     icon: Brain,
-    color: "blue",
     description:
       "Artificial Intelligence and Machine Learning are transforming every industry — from healthcare diagnostics to financial fraud detection. In this track, you'll build systems that learn, adapt, and make intelligent decisions. Whether it's a predictive model, a generative AI app, or a computer vision pipeline, this track challenges you to push the boundaries of what machines can do.",
     problemStatements: [
@@ -32,7 +31,6 @@ const themeData = {
   "web-dev": {
     title: "Web Development",
     icon: Globe,
-    color: "teal",
     description:
       "The web is the world's most accessible platform. This track is all about crafting fast, beautiful, and functional web experiences. From full-stack applications to micro-frontends, from REST APIs to real-time systems — if it runs in a browser or serves one, it belongs here. Build something people will actually use.",
     problemStatements: [
@@ -57,7 +55,6 @@ const themeData = {
   cybersecurity: {
     title: "Cybersecurity",
     icon: Shield,
-    color: "red",
     description:
       "In an increasingly connected world, security is not optional — it's essential. This track challenges you to think like both an attacker and a defender. Build tools that detect intrusions, protect data, expose vulnerabilities, and educate users about digital safety. Every line of code you write here could protect someone's privacy or critical infrastructure.",
     problemStatements: [
@@ -82,7 +79,6 @@ const themeData = {
   blockchain: {
     title: "Blockchain / Web3",
     icon: Link2,
-    color: "orange",
     description:
       "Blockchain technology is redefining trust, ownership, and transparency. This track invites you to build on decentralized infrastructure — smart contracts, DAOs, NFT platforms, DeFi protocols, or identity systems. Whether you're on Ethereum, Solana, or a Layer 2, this track is your playground to experiment with the future of the internet.",
     problemStatements: [
@@ -107,7 +103,6 @@ const themeData = {
   "open-innovation": {
     title: "Open Innovation",
     icon: Lightbulb,
-    color: "green",
     description:
       "Not every great idea fits neatly into a category. The Open Innovation track is for the builders who see a problem in the world and refuse to wait for someone else to fix it. Use any technology, any stack, any approach — as long as your solution addresses a real human need and demonstrates genuine creative thinking.",
     problemStatements: [
@@ -134,24 +129,15 @@ const themeData = {
 };
 
 const difficultyColor = {
-  Easy: "text-green-400 bg-green-400/10 border-green-400/30",
+  Easy:   "text-fray-success-primary bg-fray-success-primary/10 border-fray-success-primary/30",
   Medium: "text-yellow-400 bg-yellow-400/10 border-yellow-400/30",
-  Hard: "text-red-400 bg-red-400/10 border-red-400/30",
-};
-
-const accentMap = {
-  blue:   { text: "text-blue-400",   bg: "bg-blue-500",   border: "border-blue-500"   },
-  teal:   { text: "text-teal-400",   bg: "bg-teal-500",   border: "border-teal-500"   },
-  red:    { text: "text-red-400",    bg: "bg-red-500",    border: "border-red-500"    },
-  orange: { text: "text-orange-400", bg: "bg-orange-500", border: "border-orange-500" },
-  green:  { text: "text-green-400",  bg: "bg-green-500",  border: "border-green-500"  },
+  Hard:   "text-red-400 bg-red-400/10 border-red-400/30",
 };
 
 export default function ExplorePage() {
   const { slug } = useParams();
   const navigate = useNavigate();
 
-  // ── Scroll to top whenever this page loads ──────────────────
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
@@ -160,11 +146,12 @@ export default function ExplorePage() {
 
   if (!theme) {
     return (
-      <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center gap-4">
-        <p className="text-zinc-400 text-lg">Theme not found.</p>
+      <div className="min-h-screen bg-fray-bg-base text-fray-text-primary flex flex-col items-center justify-center gap-4">
+        <p className="text-fray-text-subtle text-lg">Theme not found.</p>
         <button
           onClick={() => navigate("/")}
-          className="text-sm px-4 py-2 bg-blue-500 hover:bg-blue-400 rounded-md text-white transition"
+          style={{ background: "linear-gradient(to right, #22D3EE, #38BDF8, #A5B4FC)" }}
+          className="text-sm px-4 py-2 rounded-md text-fray-bg-base font-semibold transition hover:opacity-90"
         >
           Back to Home
         </button>
@@ -173,16 +160,15 @@ export default function ExplorePage() {
   }
 
   const Icon = theme.icon;
-  const accent = accentMap[theme.color];
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white">
+    <div className="min-h-screen bg-fray-bg-base text-fray-text-primary">
 
       {/* Top bar */}
-      <div className="border-b border-zinc-800 px-6 py-4 flex items-center gap-4">
+      <div className="border-b border-fray-border-soft px-6 py-4 flex items-center gap-4">
         <button
           onClick={() => navigate("/")}
-          className="flex items-center gap-2 text-zinc-400 hover:text-white transition text-sm"
+          className="flex items-center gap-2 text-fray-text-subtle hover:text-fray-accent-primary transition text-sm"
         >
           <ArrowLeft size={16} />
           Back
@@ -194,33 +180,43 @@ export default function ExplorePage() {
         {/* Header */}
         <div className="flex items-start gap-4 mb-6">
           <div
-            className={`p-3 rounded-xl border ${accent.border} flex-shrink-0`}
-            style={{ background: "rgba(255,255,255,0.05)" }}
+            className="p-3 rounded-xl border border-fray-accent-primary/40 flex-shrink-0"
+            style={{ background: "rgba(34,211,238,0.08)" }}
           >
-            <Icon size={28} className={accent.text} />
+            <Icon size={28} className="text-fray-accent-primary" />
           </div>
           <div>
-            <p className={`text-sm font-semibold uppercase tracking-widest mb-1 ${accent.text}`}>
+            <p className="text-sm font-semibold uppercase tracking-widest mb-1 text-fray-accent-primary">
               Track
             </p>
-            <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight">
-              {theme.title}
-            </h1>
+            <h1
+  className="text-3xl md:text-4xl font-bold leading-tight"
+  style={{
+    background: "linear-gradient(to right, #06B6D4, #22D3EE, #818CF8)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+  }}
+>
+  {theme.title}
+</h1>
           </div>
         </div>
 
         {/* Description */}
-        <p className="text-zinc-400 text-base leading-relaxed mb-12 max-w-3xl">
+        <p className="text-fray-text-subtle text-base leading-relaxed mb-12 max-w-3xl">
           {theme.description}
         </p>
 
         {/* Problem count badge */}
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-white flex items-center gap-2">
-            <span className={`w-1 h-6 rounded-full ${accent.bg}`} />
+          <h2 className="text-xl font-bold text-fray-text-primary flex items-center gap-2">
+            <span
+              className="w-1 h-6 rounded-full"
+              style={{ background: "linear-gradient(to bottom, #22D3EE, #A5B4FC)" }}
+            />
             Problem Statements
           </h2>
-          <span className="text-xs text-zinc-500 bg-zinc-800 px-3 py-1 rounded-full">
+          <span className="text-xs text-fray-text-subtle bg-fray-border-soft px-3 py-1 rounded-full">
             {theme.problemStatements.length} problems
           </span>
         </div>
@@ -229,27 +225,62 @@ export default function ExplorePage() {
         <div className="grid gap-5">
           {theme.problemStatements.map((ps) => (
             <div
-              key={ps.id}
-              className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6
-              hover:border-zinc-600 transition duration-300"
-            >
-              <div className="flex items-start justify-between gap-4 mb-3">
-                <div className="flex items-center gap-3 flex-wrap">
-                  <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-2 py-0.5 rounded">
-                    {ps.id}
-                  </span>
-                  <h3 className="text-white font-semibold text-base">
-                    {ps.title}
-                  </h3>
-                </div>
-                <span className={`text-xs font-medium px-2.5 py-1 rounded-full border flex-shrink-0 ${difficultyColor[ps.difficulty]}`}>
-                  {ps.difficulty}
-                </span>
-              </div>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                {ps.description}
-              </p>
-            </div>
+  key={ps.id}
+  className="relative bg-fray-bg-card border border-fray-border-soft rounded-2xl p-6
+  hover:border-cyan-400/80
+  transition-all duration-300 group overflow-hidden cursor-pointer"
+  style={{ transition: "border-color 0.3s ease, box-shadow 0.3s ease" }}
+  onMouseEnter={e => {
+    e.currentTarget.style.boxShadow =
+      "0 0 0 1px rgba(34,211,238,0.5), 0 0 24px rgba(34,211,238,0.25), 0 0 48px rgba(56,189,248,0.12)";
+  }}
+  onMouseLeave={e => {
+    e.currentTarget.style.boxShadow = "none";
+  }}
+>
+  {/* Animated gradient wash on hover */}
+  <div
+    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
+    style={{
+      background: "linear-gradient(135deg, rgba(6,182,212,0.1) 0%, rgba(34,211,238,0.07) 50%, rgba(129,140,248,0.05) 100%)",
+    }}
+  />
+
+  {/* Left accent bar */}
+  <div
+    className="absolute left-0 top-4 bottom-4 w-0.5 rounded-full scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-center"
+    style={{ background: "linear-gradient(to bottom, #06B6D4, #818CF8)" }}
+  />
+
+  <div className="flex items-start justify-between gap-4 mb-3">
+    <div className="flex items-center gap-3 flex-wrap">
+      <span
+        className="text-xs font-mono text-fray-text-subtle bg-fray-border-soft px-2 py-0.5 rounded
+        group-hover:text-cyan-300 group-hover:border group-hover:border-cyan-400/40
+        transition-all duration-300"
+      >
+        {ps.id}
+      </span>
+      <h3
+        className="font-semibold text-base"
+        style={{
+          background: "linear-gradient(to right, #06B6D4, #22D3EE, #38BDF8)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+        }}
+      >
+        {ps.title}
+      </h3>
+    </div>
+    <span className={`text-xs font-medium px-2.5 py-1 rounded-full border flex-shrink-0 ${difficultyColor[ps.difficulty]}`}>
+      {ps.difficulty}
+    </span>
+  </div>
+
+  <p className="text-fray-text-subtle text-sm leading-relaxed group-hover:text-fray-text-secondary transition-colors duration-300">
+    {ps.description}
+  </p>
+</div>
           ))}
         </div>
 
