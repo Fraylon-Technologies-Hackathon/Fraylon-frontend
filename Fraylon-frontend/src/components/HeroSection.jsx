@@ -1,10 +1,5 @@
-const scrollToThemes = () => {
-  const section = document.getElementById("themes");
-  if (section) {
-    section.scrollIntoView({ behavior: "smooth" });
-  }
-};
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import {
   ArrowRight,
@@ -28,11 +23,19 @@ const orbitIcons = [
 
 const HeroSection = () => {
   const [loaded, setLoaded] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 100);
     return () => clearTimeout(timer);
   }, []);
+
+  const scrollToThemes = () => {
+    const section = document.getElementById("themes");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
@@ -71,8 +74,9 @@ const HeroSection = () => {
           {/* LEFT CONTENT */}
           <div className="max-w-2xl flex-1 text-center lg:text-left">
             <div
-              className={`inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-8 transition-all duration-700 ${loaded ? "animate-fade-in-left" : "opacity-0"
-                }`}
+              className={`inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-8 transition-all duration-700 ${
+                loaded ? "animate-fade-in-left" : "opacity-0"
+              }`}
             >
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
               <span className="text-sm font-medium text-primary">
@@ -81,8 +85,9 @@ const HeroSection = () => {
             </div>
 
             <h1
-              className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 transition-all duration-700 ${loaded ? "animate-fade-in" : "opacity-0"
-                }`}
+              className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 transition-all duration-700 ${
+                loaded ? "animate-fade-in" : "opacity-0"
+              }`}
               style={{ animationDelay: "0.2s" }}
             >
               <span className="text-foreground">AI HACKSPHERE</span>
@@ -91,8 +96,9 @@ const HeroSection = () => {
             </h1>
 
             <p
-              className={`text-base md:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed transition-all duration-700 ${loaded ? "animate-fade-in" : "opacity-0"
-                }`}
+              className={`text-base md:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed transition-all duration-700 ${
+                loaded ? "animate-fade-in" : "opacity-0"
+              }`}
               style={{ animationDelay: "0.4s" }}
             >
               Join innovators worldwide to build the future of technology.
@@ -102,8 +108,9 @@ const HeroSection = () => {
 
             {/* Event info */}
             <div
-              className={`flex flex-wrap justify-center lg:justify-start gap-6 mb-10 text-sm text-surface-foreground/70 transition-all duration-700 ${loaded ? "animate-fade-in" : "opacity-0"
-                }`}
+              className={`flex flex-wrap justify-center lg:justify-start gap-6 mb-10 text-sm text-surface-foreground/70 transition-all duration-700 ${
+                loaded ? "animate-fade-in" : "opacity-0"
+              }`}
               style={{ animationDelay: "0.6s" }}
             >
               <div className="flex items-center gap-2">
@@ -124,18 +131,20 @@ const HeroSection = () => {
 
             {/* Buttons */}
             <div
-              className={`flex flex-wrap justify-center lg:justify-start gap-4 transition-all duration-700 ${loaded ? "animate-fade-in" : "opacity-0"
-                }`}
+              className={`flex flex-wrap justify-center lg:justify-start gap-4 transition-all duration-700 ${
+                loaded ? "animate-fade-in" : "opacity-0"
+              }`}
               style={{ animationDelay: "0.8s" }}
             >
               {/* Register Button */}
               <Button
                 size="lg"
+                onClick={() => navigate("/register")}
                 className="h-12 px-8 rounded-xl text-white font-semibold 
-    bg-gradient-to-r from-primary to-purple-500 
-    hover:from-primary/90 hover:to-purple-600 
-    shadow-lg hover:shadow-primary/40 
-    transition-all duration-300"
+                bg-gradient-to-r from-primary to-purple-500 
+                hover:from-primary/90 hover:to-purple-600 
+                shadow-lg hover:shadow-primary/40 
+                transition-all duration-300"
               >
                 Register Now <ArrowRight size={18} />
               </Button>
@@ -145,9 +154,9 @@ const HeroSection = () => {
                 size="lg"
                 onClick={scrollToThemes}
                 className="h-12 px-8 rounded-xl font-semibold 
-    bg-surface border border-primary/30 
-    text-primary hover:bg-primary hover:text-white 
-    transition-all duration-300 shadow-md"
+                bg-surface border border-primary/30 
+                text-primary hover:bg-primary hover:text-white 
+                transition-all duration-300 shadow-md"
               >
                 Explore Themes
               </Button>
@@ -156,8 +165,9 @@ const HeroSection = () => {
 
           {/* RIGHT SIDE ORBIT ANIMATION */}
           <div
-            className={`hidden lg:flex items-center justify-center flex-shrink-0 transition-all duration-1000 ${loaded ? "animate-fade-in-right" : "opacity-0"
-              }`}
+            className={`hidden lg:flex items-center justify-center flex-shrink-0 transition-all duration-1000 ${
+              loaded ? "animate-fade-in-right" : "opacity-0"
+            }`}
             style={{ animationDelay: "0.5s" }}
           >
             <div className="relative w-[280px] h-[280px] xl:w-[340px] xl:h-[340px]">
@@ -181,7 +191,6 @@ const HeroSection = () => {
               {/* Orbit icons */}
               {orbitIcons.map(({ Icon, delay, size }, i) => {
                 const angle = (360 / orbitIcons.length) * i;
-
                 return (
                   <div
                     key={i}
@@ -214,6 +223,7 @@ const HeroSection = () => {
               ))}
             </div>
           </div>
+
         </div>
       </div>
     </section>

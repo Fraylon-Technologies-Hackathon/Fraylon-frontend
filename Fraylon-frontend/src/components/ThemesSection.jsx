@@ -50,41 +50,48 @@ const ThemeCard = ({ theme }) => {
     <div className="flex-shrink-0 py-3">
       <div
         className="w-[240px] rounded-2xl overflow-hidden
-        bg-zinc-900 border border-zinc-800
+        bg-fray-bg-card border border-fray-border-soft
         shadow-lg flex flex-col
-        hover:shadow-[0_0_40px_rgba(59,130,246,0.8)]
-        hover:border-blue-400/60
+        hover:shadow-[0_0_40px_rgba(34,211,238,0.35)]
+        hover:border-fray-accent-primary/50
         hover:scale-105
         transition-all duration-500 group"
         style={{ height: "320px" }}
       >
         {/* Image */}
-        <div className="h-32 overflow-hidden flex-shrink-0">
+        <div className="h-32 overflow-hidden flex-shrink-0 relative">
           <img
             src={theme.image}
             alt={theme.title}
             className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-fray-bg-card/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         </div>
 
         {/* Card body */}
         <div className="p-4 flex flex-col flex-1">
           <div className="flex items-start gap-2 mb-2">
-            <Icon size={16} className="text-blue-400 flex-shrink-0 mt-0.5" />
-            <h3 className="text-white font-semibold text-sm leading-tight">
+            <Icon
+              size={16}
+              className="text-fray-accent-primary flex-shrink-0 mt-0.5"
+            />
+            <h3 className="text-fray-accent-primary font-semibold text-sm leading-tight">
               {theme.title}
             </h3>
           </div>
 
-          <p className="text-xs text-zinc-400 leading-relaxed flex-1">
+          <p className="text-xs text-fray-text-subtle leading-relaxed flex-1">
             {theme.description}
           </p>
 
           <button
             onClick={() => navigate(`/explore/${theme.slug}`)}
+            style={{
+              background: "linear-gradient(to right, #22D3EE, #38BDF8, #A5B4FC)",
+            }}
             className="mt-4 w-full text-xs px-3 py-2 rounded-md
-            bg-blue-500 hover:bg-blue-400
-            text-white transition duration-300 font-medium"
+            hover:opacity-90
+            text-fray-bg-base font-semibold transition duration-300"
           >
             Explore
           </button>
@@ -100,14 +107,12 @@ const ThemesSection = () => {
   const isPausedRef = useRef(false);
   const SPEED = 0.6;
 
-  // Drag state
   const isDraggingRef = useRef(false);
   const dragStartXRef = useRef(0);
   const scrollStartRef = useRef(0);
 
   const allCards = [...themes, ...themes, ...themes];
 
-  // ── Autoscroll loop ──────────────────────────────────────────
   const autoScroll = useCallback(() => {
     const el = sliderRef.current;
     if (!el) return;
@@ -132,14 +137,8 @@ const ThemesSection = () => {
     return () => cancelAnimationFrame(animFrameRef.current);
   }, [autoScroll]);
 
-  // ── Hover pause / resume ─────────────────────────────────────
   const pauseScroll = () => { isPausedRef.current = true; };
-  const resumeScroll = () => {
-    // Only resume if not currently dragging
-    if (!isDraggingRef.current) isPausedRef.current = false;
-  };
 
-  // ── Drag handlers ────────────────────────────────────────────
   const onMouseDown = (e) => {
     isDraggingRef.current = true;
     isPausedRef.current = true;
@@ -168,7 +167,6 @@ const ThemesSection = () => {
     isPausedRef.current = false;
   };
 
-  // ── Touch handlers (mobile drag) ─────────────────────────────
   const onTouchStart = (e) => {
     isDraggingRef.current = true;
     isPausedRef.current = true;
@@ -188,21 +186,19 @@ const ThemesSection = () => {
   };
 
   return (
-    <section id="themes" className="py-24">
-
+    <section id="themes" className="py-24 bg-fray-bg-section">
       <div className="text-center mb-14">
-        <span className="text-blue-400 text-sm font-semibold tracking-widest uppercase mb-3 block">
+        <span className="text-fray-accent-primary text-sm font-semibold tracking-widest uppercase mb-3 block">
           Explore Tracks
         </span>
-        <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+        <h2 className="text-3xl md:text-5xl font-bold text-fray-text-primary mb-4">
           Choose Your Challenge
         </h2>
-        <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+        <p className="text-fray-text-subtle text-lg max-w-2xl mx-auto">
           Pick a theme and explore example problem statements.
         </p>
       </div>
 
-      {/* No arrows — drag or let it autoscroll */}
       <div className="max-w-6xl mx-auto">
         <div
           ref={sliderRef}
@@ -226,7 +222,6 @@ const ThemesSection = () => {
           ))}
         </div>
       </div>
-
     </section>
   );
 };
