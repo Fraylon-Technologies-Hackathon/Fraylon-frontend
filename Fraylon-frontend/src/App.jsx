@@ -1,13 +1,14 @@
 
 import './App.css'
-import CTASection from './components/CTASection';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import ThemesSection from './components/ThemesSection';
-import AboutSection from './components/AboutSection';
+import Insights from './components/Insights';
 import WhySection from './components/WhySection';
+import ScheduleSection from './components/ScheduleSection';
 import FAQSection from './components/FAQSection';
+import Sponsorsection from './components/Sponsorsection';
 import "./index.css";
 
 const App = () => {
@@ -16,11 +17,13 @@ const App = () => {
       <Header />
       <HeroSection />
       <ThemesSection />
-      <AboutSection />
+      <Insights/>
       <WhySection />
-      <CTASection />
+      <ScheduleSection/>
       <FAQSection/>
+      <Sponsorsection/>
       <Footer />
+    
     </div>
   );
 };
