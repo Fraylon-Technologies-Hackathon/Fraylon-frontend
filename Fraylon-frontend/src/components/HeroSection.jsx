@@ -1,23 +1,30 @@
-import { useState, useEffect, useCallback } from "react";
-import { ArrowRight, Calendar, MapPin, Users } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "../components/ui/button";
+import {
+  ArrowRight,
+  Calendar,
+  MapPin,
+  Users,
+  Code2,
+  Cpu,
+  Zap,
+  Rocket,
+  Binary,
+} from "lucide-react";
 
-import slide1 from "../assets/slide1.jpg";
-import slide2 from "../assets/slide2.jpg";
-import slide3 from "../assets/slide3.jpg";
-import slide4 from "../assets/slide4.jpg";
-import slide5 from "../assets/slide5.jpg";
-
-const slides = [
-  { src: slide1, overlay: "from-teal/70 via-emerald/50 to-black/70" },
-  { src: slide2, overlay: "from-primary/70 via-teal/50 to-black/70" },
-  { src: slide3, overlay: "from-accent/60 via-primary/50 to-black/70" },
-  { src: slide4, overlay: "from-emerald/70 via-teal/50 to-black/70" },
-  { src: slide5, overlay: "from-primary/60 via-accent/50 to-black/70" },
+const orbitIcons = [
+  { Icon: Code2, delay: 0, size: 22 },
+  { Icon: Cpu, delay: 1.2, size: 20 },
+  { Icon: Zap, delay: 2.4, size: 18 },
+  { Icon: Rocket, delay: 3.6, size: 22 },
+  { Icon: Binary, delay: 4.8, size: 20 },
 ];
 
 const HeroSection = () => {
   const [current, setCurrent] = useState(0);
   const [loaded, setLoaded] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 100);
@@ -28,10 +35,12 @@ const HeroSection = () => {
     setCurrent((p) => (p + 1) % slides.length);
   }, []);
 
-  useEffect(() => {
-    const i = setInterval(next, 5000);
-    return () => clearInterval(i);
-  }, [next]);
+  const scrollToThemes = () => {
+    const section = document.getElementById("themes");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <section className="relative w-full min-h-screen flex items-center overflow-hidden">
@@ -67,8 +76,8 @@ const HeroSection = () => {
 
             {/* Badge */}
             <div
-              className={`inline-flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur-md rounded-full px-4 py-2 mb-8 transition-all duration-1000 ${
-                loaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+              className={`inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-8 transition-all duration-700 ${
+                loaded ? "animate-fade-in-left" : "opacity-0"
               }`}
             >
               <span className="relative flex h-2 w-2">
@@ -82,9 +91,10 @@ const HeroSection = () => {
 
             {/* Title */}
             <h1
-              className={`text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[0.9] mb-6 tracking-tighter transition-all duration-1000 delay-100 ${
-                loaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+              className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 transition-all duration-700 ${
+                loaded ? "animate-fade-in" : "opacity-0"
               }`}
+              style={{ animationDelay: "0.2s" }}
             >
               <span className="text-white">AI HACK</span>
               <br />
@@ -95,9 +105,10 @@ const HeroSection = () => {
 
             {/* Subtitle */}
             <p
-              className={`text-lg md:text-xl text-white/70 max-w-xl mx-auto lg:mx-0 mb-10 transition-all duration-1000 delay-200 ${
-                loaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+              className={`text-base md:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed transition-all duration-700 ${
+                loaded ? "animate-fade-in" : "opacity-0"
               }`}
+              style={{ animationDelay: "0.4s" }}
             >
               Join 500+ innovators to build next-gen AI solutions, compete, and
               collaborate globally.
@@ -105,9 +116,10 @@ const HeroSection = () => {
 
             {/* Info cards */}
             <div
-              className={`grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 transition-all duration-1000 delay-300 ${
-                loaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+              className={`flex flex-wrap justify-center lg:justify-start gap-6 mb-10 text-sm text-surface-foreground/70 transition-all duration-700 ${
+                loaded ? "animate-fade-in" : "opacity-0"
               }`}
+              style={{ animationDelay: "0.6s" }}
             >
               {[
                 { icon: <Calendar size={18} />, label: "March 15-17", sub: "2026" },
@@ -131,38 +143,99 @@ const HeroSection = () => {
 
             {/* Buttons */}
             <div
-              className={`flex flex-col sm:flex-row items-center lg:items-start 
-              justify-center lg:justify-start gap-4 transition-all duration-1000 delay-500 ${
-                loaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+              className={`flex flex-wrap justify-center lg:justify-start gap-4 transition-all duration-700 ${
+                loaded ? "animate-fade-in" : "opacity-0"
               }`}
+              style={{ animationDelay: "0.8s" }}
             >
-              
-              {/* 🚀 Primary Button */}
-              <button
-                className="h-14 px-10 rounded-xl font-semibold text-white 
-                bg-gradient-to-r from-teal-400 via-emerald-500 to-blue-500
-                hover:from-teal-300 hover:via-emerald-400 hover:to-blue-400
-                shadow-lg shadow-emerald-500/30
-                hover:shadow-[0_0_25px_rgba(16,185,129,0.5)]
-                transition-all duration-300 flex items-center justify-center"
-              >
-                Secure Your Spot
-                <ArrowRight className="ml-2" />
-              </button>
-
-              {/* 🌑 Secondary Button */}
-              <button
-                className="h-14 px-10 rounded-xl font-semibold text-white 
-                bg-white/10 backdrop-blur-md border border-white/20
-                hover:bg-gradient-to-r hover:from-teal-400/20 hover:via-emerald-400/20 hover:to-blue-400/20
-                hover:border-teal-300/40
+              {/* Register Button */}
+              <Button
+                size="lg"
+                onClick={() => navigate("/register")}
+                className="h-12 px-8 rounded-xl text-white font-semibold 
+                bg-gradient-to-r from-primary to-purple-500 
+                hover:from-primary/90 hover:to-purple-600 
+                shadow-lg hover:shadow-primary/40 
                 transition-all duration-300"
+              >
+                Register Now <ArrowRight size={18} />
+              </Button>
+
+              {/* Explore Button */}
+              <Button
+                size="lg"
+                onClick={scrollToThemes}
+                className="h-12 px-8 rounded-xl font-semibold 
+                bg-surface border border-primary/30 
+                text-primary hover:bg-primary hover:text-white 
+                transition-all duration-300 shadow-md"
               >
                 View Tracks
               </button>
             </div>
-
           </div>
+
+          {/* RIGHT SIDE ORBIT ANIMATION */}
+          <div
+            className={`hidden lg:flex items-center justify-center flex-shrink-0 transition-all duration-1000 ${
+              loaded ? "animate-fade-in-right" : "opacity-0"
+            }`}
+            style={{ animationDelay: "0.5s" }}
+          >
+            <div className="relative w-[280px] h-[280px] xl:w-[340px] xl:h-[340px]">
+
+              {/* Outer ring */}
+              <div className="absolute inset-0 rounded-full border border-primary/15 animate-spin-slow" />
+
+              {/* Middle ring */}
+              <div className="absolute inset-8 rounded-full border border-primary/20 animate-spin-reverse" />
+
+              {/* Inner glow */}
+              <div className="absolute inset-16 rounded-full bg-primary/5 border border-primary/25 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="text-4xl font-extrabold text-primary">48h</div>
+                  <div className="text-xs text-muted-foreground mt-1 font-medium">
+                    of innovation
+                  </div>
+                </div>
+              </div>
+
+              {/* Orbit icons */}
+              {orbitIcons.map(({ Icon, delay, size }, i) => {
+                const angle = (360 / orbitIcons.length) * i;
+                return (
+                  <div
+                    key={i}
+                    className="absolute w-10 h-10 rounded-xl bg-surface border border-primary/20 flex items-center justify-center shadow-lg animate-float"
+                    style={{
+                      top: `${50 + 42 * Math.sin((angle * Math.PI) / 180)}%`,
+                      left: `${50 + 42 * Math.cos((angle * Math.PI) / 180)}%`,
+                      transform: "translate(-50%, -50%)",
+                      animationDelay: `${delay}s`,
+                      animationDuration: `${3 + i * 0.3}s`,
+                    }}
+                  >
+                    <Icon size={size} className="text-primary" />
+                  </div>
+                );
+              })}
+
+              {/* Pulsing dots */}
+              {[0, 90, 180, 270].map((deg, i) => (
+                <div
+                  key={i}
+                  className="absolute w-2 h-2 rounded-full bg-primary/60 animate-pulse"
+                  style={{
+                    top: `${50 + 50 * Math.sin((deg * Math.PI) / 180)}%`,
+                    left: `${50 + 50 * Math.cos((deg * Math.PI) / 180)}%`,
+                    transform: "translate(-50%, -50%)",
+                    animationDelay: `${i * 0.4}s`,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
 

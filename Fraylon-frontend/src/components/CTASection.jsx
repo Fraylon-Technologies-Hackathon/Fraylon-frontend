@@ -57,6 +57,7 @@ const CTASection = () => {
 
             <Button
               size="lg"
+              
               className="h-12 sm:h-13 px-8 sm:px-10 rounded-xl text-sm sm:text-base 
               bg-gradient-to-r from-[hsl(var(--gradient-brand-start))] to-[hsl(var(--gradient-brand-end))] 
               hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-[0_10px_30px_-10px_hsl(var(--accent)/0.7)]"
