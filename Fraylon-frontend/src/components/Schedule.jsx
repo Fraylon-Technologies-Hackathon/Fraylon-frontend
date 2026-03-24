@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { User } from "lucide-react";
 
-const ScheduleHero = () => {
+const Schedule = () => {
   return (
     <section className="min-h-screen relative flex items-center justify-center px-6 py-20">
 
@@ -162,4 +162,4 @@ const ScheduleHero = () => {
   );
 };
 
-export default ScheduleHero;
+export default Schedule;

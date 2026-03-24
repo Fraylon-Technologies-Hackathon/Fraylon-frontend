@@ -6,11 +6,11 @@ import HeroSection from './components/HeroSection';
 import ThemesSection from './components/ThemesSection';
 import Insights from './components/Insights';
 import WhySection from './components/WhySection';
-import Schedule from './components/Schedule';
 import CTASection from './components/CTASection';
 import FAQSection from './components/FAQSection';
 import Sponsor from './components/Sponsor';
 import "./index.css";
+import Schedule from './components/Schedule';
 
 const App = () => {
   return (
@@ -18,14 +18,14 @@ const App = () => {
       <Header />
       <HeroSection />
       <ThemesSection />
-      <Insights/>
+      <Insights />
       <WhySection />
       <Schedule />
       <CTASection />
       <FAQSection />
       <Sponsor />
       <Footer />
-    
+
     </div>
   );
 };
