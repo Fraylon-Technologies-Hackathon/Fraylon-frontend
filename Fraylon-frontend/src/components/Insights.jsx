@@ -69,48 +69,43 @@ const insightsData = [
 
 export default function InsightsSection() {
   return (
-    <section className="py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-28 relative">
+      {/* 🌿 Background Glow */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-teal-50 via-cyan-50 to-blue-50" />
+
+      <div className="container-main">
 
         {/* HEADER */}
-        <div className="mb-16 flex justify-between items-end">
-          <div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Insights & <span className="text-teal-500">Analytics</span>
-            </h2>
+        <div className="mb-16 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+            Insights & <span className="text-gradient">Analytics</span>
+          </h2>
 
-            <p className="mt-4 text-gray-600 max-w-xl">
-              Deep dive into trends, data, and strategies shaping modern hackathons.
-            </p>
-          </div>
-
-          {/* <button className="hidden md:block px-5 py-2 rounded-full 
-            bg-gradient-to-r from-teal-500 via-blue-500 to-cyan-500 
-            text-white text-sm shadow-md hover:opacity-90 transition">
-            View All
-          </button> */}
+          <p className="mt-4 text-gray-600 max-w-xl mx-auto">
+            Deep dive into trends, data, and strategies shaping modern hackathons.
+          </p>
         </div>
 
         {/* FEATURED CARD */}
         <motion.div
           whileInView={{ opacity: 1, y: 0 }}
           initial={{ opacity: 0, y: 60 }}
-          className="relative mb-10 p-[2px] rounded-3xl"
+          className="relative mb-14 max-w-5xl mx-auto p-[2px] rounded-3xl"
         >
           {/* Glow */}
-          <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-teal-400 via-blue-400 to-cyan-400 blur-xl opacity-70" />
+          <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-teal-400 via-blue-400 to-cyan-400 blur-xl opacity-60" />
 
-          {/* Content */}
-          <div className="relative p-10 rounded-3xl bg-gradient-to-r from-teal-500 via-blue-500 to-cyan-500 text-white shadow-xl">
-            <h3 className="text-3xl font-bold">
+          {/* Glass Card */}
+          <div className="relative p-10 rounded-3xl bg-white/80 backdrop-blur-xl shadow-xl">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
               🚀 The Future of Hackathons: AI + Startup Ecosystem
             </h3>
 
-            <p className="mt-4 max-w-2xl opacity-90">
+            <p className="mt-4 text-gray-600 max-w-2xl">
               Discover how AI-powered innovation and startup culture are transforming hackathons into launchpads for billion-dollar ideas.
             </p>
 
-            <div className="mt-6 flex gap-6 text-sm opacity-90">
+            <div className="mt-6 flex flex-wrap gap-6 text-sm text-gray-500">
               <span>🔥 5K+ Readers</span>
               <span>⏱ 7 min read</span>
               <span>📅 Aug 2025</span>
@@ -136,17 +131,17 @@ export default function InsightsSection() {
                 blur-lg transition duration-500
               " />
 
-              {/* Card */}
+              {/* Glass Card */}
               <div className="
-                relative bg-white rounded-2xl p-6
-                border border-gray-100
+                relative bg-white/80 backdrop-blur-xl rounded-2xl p-6
+                border border-white/40
                 shadow-md
                 group-hover:-translate-y-2
                 group-hover:shadow-xl
                 transition
               ">
                 {/* Category */}
-                <span className="text-xs text-teal-500 uppercase font-semibold">
+                <span className="text-xs text-teal-600 uppercase font-semibold">
                   {item.category}
                 </span>
 
@@ -170,11 +165,6 @@ export default function InsightsSection() {
                   <span>{item.read}</span>
                   <span>{item.date}</span>
                 </div>
-
-                {/* CTA */}
-                {/* <button className="mt-4 text-sm text-teal-500 hover:text-blue-500 transition">
-                  Read More →
-                </button> */}
               </div>
             </motion.div>
           ))}

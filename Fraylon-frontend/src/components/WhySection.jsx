@@ -3,7 +3,15 @@ import React from "react";
 
 export default function WhyChooseAgency() {
   return (
-    <section className="py-28 bg-gradient-to-br from-[#f5f7fa] via-[#eef2f7] to-[#e9f6f4]">
+    <section className="py-28 relative overflow-hidden">
+
+      {/* 🌿 SAME BACKGROUND AS INSIGHTS */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-teal-50 via-cyan-50 to-blue-50" />
+
+      {/* ✨ subtle glow (matches CTA vibe) */}
+      <div className="absolute -top-32 -left-32 w-[300px] h-[300px] bg-teal-300/20 blur-[120px] rounded-full -z-10" />
+      <div className="absolute -bottom-32 -right-32 w-[300px] h-[300px] bg-blue-300/20 blur-[120px] rounded-full -z-10" />
+
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
@@ -26,7 +34,7 @@ export default function WhyChooseAgency() {
           <motion.div
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 60 }}
-            className="col-span-12 md:col-span-5 p-10 rounded-3xl bg-gradient-to-br from-indigo-500 to-indigo-600 text-white shadow-xl hover:-translate-y-2 transition"
+            className="col-span-12 md:col-span-5 p-10 rounded-3xl bg-gradient-to-br from-indigo-500 to-indigo-600 text-white shadow-xl hover:-translate-y-2 transition duration-300"
           >
             <h3 className="text-6xl font-bold">95%</h3>
             <p className="opacity-90 mt-2">Participant Satisfaction</p>
@@ -36,7 +44,7 @@ export default function WhyChooseAgency() {
           <motion.div
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 60 }}
-            className="col-span-12 md:col-span-4 p-10 rounded-3xl bg-indigo-50 border border-indigo-100 shadow-md hover:-translate-y-2 transition"
+            className="col-span-12 md:col-span-4 p-10 rounded-3xl bg-indigo-50 border border-indigo-100 shadow-md hover:-translate-y-2 transition duration-300"
           >
             <h3 className="text-5xl font-bold text-indigo-600">120+</h3>
             <p className="text-gray-600 mt-2">Projects Delivered</p>
@@ -59,7 +67,7 @@ export default function WhyChooseAgency() {
           <motion.div
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 60 }}
-            className="col-span-12 md:col-span-3 p-8 rounded-3xl bg-teal-50 border border-teal-100 shadow-md hover:-translate-y-2 transition"
+            className="col-span-12 md:col-span-3 p-8 rounded-3xl bg-teal-50 border border-teal-100 shadow-md hover:-translate-y-2 transition duration-300"
           >
             <h3 className="text-3xl font-bold text-teal-600">24/7</h3>
             <p className="text-gray-600 mt-2">Mentor Support</p>
@@ -69,7 +77,7 @@ export default function WhyChooseAgency() {
           <motion.div
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 60 }}
-            className="col-span-12 md:col-span-6 p-8 rounded-3xl bg-purple-50 border border-purple-100 shadow-md hover:-translate-y-2 transition"
+            className="col-span-12 md:col-span-6 p-8 rounded-3xl bg-purple-50 border border-purple-100 shadow-md hover:-translate-y-2 transition duration-300"
           >
             <p className="text-gray-700 leading-relaxed">
               “Your success is our mission — we don’t just host hackathons,
@@ -84,7 +92,7 @@ export default function WhyChooseAgency() {
           <motion.div
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 60 }}
-            className="col-span-12 md:col-span-3 p-8 rounded-3xl bg-lime-300 shadow-md hover:-translate-y-2 transition"
+            className="col-span-12 md:col-span-3 p-8 rounded-3xl bg-lime-300 shadow-md hover:-translate-y-2 transition duration-300"
           >
             <h3 className="text-4xl font-bold text-black">50%</h3>
             <p className="text-black/70 mt-2">Startup Conversion</p>
@@ -94,7 +102,7 @@ export default function WhyChooseAgency() {
           <motion.div
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 60 }}
-            className="col-span-12 md:col-span-4 p-8 rounded-3xl bg-sky-50 border border-sky-100 shadow-md hover:-translate-y-2 transition"
+            className="col-span-12 md:col-span-4 p-8 rounded-3xl bg-sky-50 border border-sky-100 shadow-md hover:-translate-y-2 transition duration-300"
           >
             <h3 className="text-4xl font-bold text-sky-600">10K+</h3>
             <p className="text-gray-600 mt-2">Global Developers</p>
@@ -104,7 +112,7 @@ export default function WhyChooseAgency() {
           <motion.div
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 60 }}
-            className="col-span-12 md:col-span-5 p-8 rounded-3xl bg-emerald-50 border border-emerald-100 shadow-md hover:-translate-y-2 transition"
+            className="col-span-12 md:col-span-5 p-8 rounded-3xl bg-emerald-50 border border-emerald-100 shadow-md hover:-translate-y-2 transition duration-300"
           >
             <h3 className="text-4xl font-bold text-emerald-600">30+</h3>
             <p className="text-gray-600 mt-2">Industry Mentors</p>
@@ -115,5 +123,3 @@ export default function WhyChooseAgency() {
     </section>
   );
 }
-
-

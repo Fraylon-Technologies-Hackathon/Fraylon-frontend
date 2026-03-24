@@ -1,4 +1,3 @@
-
 import { Button } from "../components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -21,50 +20,74 @@ const CTASection = () => {
   }, []);
 
   return (
-    <section ref={ref} className="py-16 sm:py-20 lg:py-24">
-      <div className="container-main">
+    <section
+      ref={ref}
+      className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-teal-400 via-cyan-400 to-blue-500"
+    >
+      <div className="container-main flex justify-center">
         <div
-          className={`relative rounded-3xl overflow-hidden transition-all duration-700 border border-white/10 ${isVisible ? "animate-scale-in" : "opacity-0"
-            }`}
+          className={`relative w-full max-w-4xl rounded-3xl transition-all duration-700 ${
+            isVisible ? "animate-scale-in" : "opacity-0"
+          }`}
         >
-          <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-[hsl(var(--gradient-brand-end))]/10 blur-[120px]" />
-          <div className="absolute top-1/4 left-0 w-[300px] h-[300px] rounded-full bg-[hsl(var(--gradient-brand-start))]/10 blur-[110px]" />
+          {/* White Card */}
+          <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl shadow-xl px-6 sm:px-10 lg:px-16 py-14 sm:py-16 text-center">
 
-          {/* Background (same image) */}
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('/cta-bg.jpg')" }}
-          />
+            {/* subtle glow */}
+            <div className="absolute -top-10 -left-10 w-40 h-40 bg-teal-300/30 rounded-full blur-3xl" />
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-300/30 rounded-full blur-3xl" />
 
-          {/* Brand overlay */}
-          <div className="absolute inset-0 bg-[hsl(var(--background))]/80 backdrop-blur-sm" />
+            {/* Badge */}
+            <div className="inline-block mb-4 px-4 py-1 text-xs sm:text-sm rounded-full bg-teal-100 text-teal-700 font-medium">
+              🚀 Ready to Transform Your Work?
+            </div>
 
-          {/* subtle brand glow */}
-          <div className="absolute -top-24 -left-24 w-[320px] h-[320px] rounded-full bg-[hsl(var(--gradient-brand-start))]/20 blur-[120px]" />
-          <div className="absolute -bottom-24 -right-24 w-[320px] h-[320px] rounded-full bg-[hsl(var(--gradient-brand-end))]/20 blur-[120px]" />
-
-          {/* Content */}
-          <div className="relative z-10 text-center py-14 sm:py-16 lg:py-20 px-6 sm:px-10 lg:px-16">
-
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-              Ready to Build Something Amazing?
+            {/* Heading */}
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+              Your Next <span className="text-teal-600">Breakthrough</span> <br />
+              Starts Here
             </h2>
 
-            <p className="text-white/70 text-base sm:text-lg max-w-xl mx-auto mb-8 leading-relaxed">
-              Register now to secure your spot. Form your team, choose a theme,
-              and start innovating with developers from around the globe.
+            {/* Description */}
+            <p className="text-gray-600 text-base sm:text-lg max-w-xl mx-auto mb-8 leading-relaxed">
+              Join thousands of innovators building the future. Collaborate,
+              create, and turn your ideas into reality faster than ever before.
             </p>
 
-            <Button
-              size="lg"
-              
-              className="h-12 sm:h-13 px-8 sm:px-10 rounded-xl text-sm sm:text-base 
-              bg-gradient-to-r from-[hsl(var(--gradient-brand-start))] to-[hsl(var(--gradient-brand-end))] 
-              hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-[0_10px_30px_-10px_hsl(var(--accent)/0.7)]"
-            >
-              Register for the Hackathon
-              <ArrowRight size={18} />
-            </Button>
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button
+                size="lg"
+                className="h-12 px-8 rounded-xl text-sm sm:text-base 
+                bg-gradient-to-r from-teal-500 to-blue-500 text-white
+                hover:opacity-90 transition-all duration-300 shadow-lg"
+              >
+                Start Your Journey
+                <ArrowRight size={18} />
+              </Button>
+
+              <Button
+                variant="outline"
+                size="lg"
+                className="h-12 px-8 rounded-xl text-sm sm:text-base 
+                bg-gradient-to-r from-teal-500 to-blue-500 text-white
+                hover:opacity-90 transition-all duration-300 shadow-lg"
+              >
+                Watch Demo
+              </Button>
+            </div>
+
+            {/* Trust indicators */}
+            <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-gray-500">
+              <span>👥 Trusted by 50,000+ creators</span>
+              <span>⚡ 10x faster results</span>
+              <span>🔒 100% secure</span>
+            </div>
+
+            {/* Offer */}
+            <div className="mt-6 inline-block px-4 py-2 rounded-full bg-orange-100 text-orange-600 text-sm">
+              🎁 Limited time: Get 3 months free
+            </div>
 
           </div>
         </div>

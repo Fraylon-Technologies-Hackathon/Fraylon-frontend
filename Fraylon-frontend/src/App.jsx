@@ -6,9 +6,10 @@ import HeroSection from './components/HeroSection';
 import ThemesSection from './components/ThemesSection';
 import Insights from './components/Insights';
 import WhySection from './components/WhySection';
-import ScheduleSection from './components/ScheduleSection';
+import Schedule from './components/Schedule';
+import CTASection from './components/CTASection';
 import FAQSection from './components/FAQSection';
-import Sponsorsection from './components/Sponsorsection';
+import Sponsor from './components/Sponsor';
 import "./index.css";
 
 const App = () => {
@@ -19,9 +20,10 @@ const App = () => {
       <ThemesSection />
       <Insights/>
       <WhySection />
-      <ScheduleSection/>
-      <FAQSection/>
-      <Sponsorsection/>
+      <Schedule />
+      <CTASection />
+      <FAQSection />
+      <Sponsor />
       <Footer />
     
     </div>
