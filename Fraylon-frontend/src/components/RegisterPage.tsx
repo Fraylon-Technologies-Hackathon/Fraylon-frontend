@@ -1,12 +1,48 @@
-import { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, Plus, Trash2, User, Users } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowLeft, ArrowRight, Plus, Trash2, User, Users, LucideIcon } from "lucide-react";
 import { themes } from "./ThemesSection";
+
+/** 
+ * TYPES & INTERFACES 
+ **/
+interface Member {
+  name: string;
+  email: string;
+}
+
+interface FormState {
+  teamName: string;
+  college: string;
+  leaderName: string;
+  leaderEmail: string;
+  leaderPhone: string;
+  members: Member[];
+  theme: string;
+  projectIdea: string;
+}
+
+type ParticipationType = "solo" | "team" | null;
+
+interface InputFieldProps {
+  label: string;
+  name: string;
+  type?: string;
+  placeholder?: string;
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  error?: string | undefined; // ✅ FIXED
+}
 
 const STEPS = ["Participation", "Team Details", "Members", "Project"];
 
-const InputField = ({ label, name, type = "text", placeholder, value, onChange, error }) => (
+/** 
+ * SUB-COMPONENT: InputField
+ **/
+const InputField: React.FC<InputFieldProps> = ({
+  label, name, type = "text", placeholder, value, onChange, error
+}) => (
   <div>
     <label className="block text-xs font-semibold text-fray-text-subtle uppercase tracking-widest mb-2">
       {label}
@@ -31,34 +67,41 @@ const InputField = ({ label, name, type = "text", placeholder, value, onChange, 
 
 export default function HackathonRegisterPage() {
   const navigate = useNavigate();
-  const [step, setStep] = useState(0);
-  const [participationType, setParticipationType] = useState(null); // "solo" | "team"
-  const [errors, setErrors] = useState({});
+  const [step, setStep] = useState<number>(0);
+  const [participationType, setParticipationType] = useState<ParticipationType>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const [form, setForm] = useState({
-    // Team details
+  const [form, setForm] = useState<FormState>({
     teamName: "",
     college: "",
-    // Leader
     leaderName: "",
     leaderEmail: "",
     leaderPhone: "",
-    // Members (up to 3 extra)
     members: [{ name: "", email: "" }],
-    // Project
     theme: "",
     projectIdea: "",
   });
 
-  const update = (field, value) => {
+  const update = (field: keyof Omit<FormState, 'members'>, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
-  const updateMember = (index, field, value) => {
-    const updated = [...form.members];
-    updated[index][field] = value;
-    setForm((prev) => ({ ...prev, members: updated }));
+  const updateMember = (index: number, field: keyof Member, value: string) => {
+    setForm((prev) => {
+      const updated = [...prev.members];
+
+      if (!updated[index]) return prev; 
+
+      updated[index] = {
+        ...updated[index],
+        [field]: value,
+      };
+
+      return { ...prev, members: updated };
+    });
+
+    setErrors((prev) => ({ ...prev, [`member_${field}_${index}`]: "" }));
   };
 
   const addMember = () => {
@@ -67,16 +110,15 @@ export default function HackathonRegisterPage() {
     }
   };
 
-  const removeMember = (index) => {
+  const removeMember = (index: number) => {
     setForm((prev) => ({
       ...prev,
       members: prev.members.filter((_, i) => i !== index),
     }));
   };
 
-  // ── Validation per step ──────────────────────────────────────
-  const validate = () => {
-    const e = {};
+  const validate = (): Record<string, string> => {
+    const e: Record<string, string> = {};
 
     if (step === 0 && !participationType) {
       e.participationType = "Please select a participation type.";
@@ -111,7 +153,6 @@ export default function HackathonRegisterPage() {
   const next = () => {
     const e = validate();
     if (Object.keys(e).length > 0) { setErrors(e); return; }
-    // Skip members step for solo
     if (step === 1 && participationType === "solo") { setStep(3); return; }
     setStep((s) => Math.min(s + 1, STEPS.length - 1));
   };
@@ -124,11 +165,10 @@ export default function HackathonRegisterPage() {
   const handleSubmit = () => {
     const e = validate();
     if (Object.keys(e).length > 0) { setErrors(e); return; }
-    // TODO: submit to backend
+    console.log("Submitting form:", form);
     navigate("/");
   };
 
-  // ── Active steps for progress bar ───────────────────────────
   const visibleSteps = participationType === "solo"
     ? ["Participation", "Leader Details", "Project"]
     : STEPS;
@@ -137,9 +177,7 @@ export default function HackathonRegisterPage() {
     ? step === 0 ? 0 : step === 1 ? 1 : 2
     : step;
 
-  // ── Step content ─────────────────────────────────────────────
   const renderStep = () => {
-    // STEP 0 — Participation type
     if (step === 0) return (
       <div className="flex flex-col gap-4">
         <p className="text-fray-text-subtle text-sm mb-2">
@@ -149,10 +187,12 @@ export default function HackathonRegisterPage() {
           <p className="text-red-400 text-xs">{errors.participationType}</p>
         )}
         <div className="grid grid-cols-2 gap-4">
-          {[
-            { value: "solo", icon: User, label: "Solo", sub: "Just you" },
-            { value: "team", icon: Users, label: "Team", sub: "2 – 4 members" },
-          ].map(({ value, icon: Icon, label, sub }) => (
+          {(
+            [
+              { value: "solo", icon: User, label: "Solo", sub: "Just you" },
+              { value: "team", icon: Users, label: "Team", sub: "2 – 4 members" },
+            ] as const
+          ).map(({ value, icon: Icon, label, sub }) => (
             <button
               key={value}
               type="button"
@@ -186,7 +226,6 @@ export default function HackathonRegisterPage() {
       </div>
     );
 
-    // STEP 1 — Team / Leader details
     if (step === 1) return (
       <div className="flex flex-col gap-5">
         {participationType === "team" && (
@@ -243,11 +282,10 @@ export default function HackathonRegisterPage() {
       </div>
     );
 
-    // STEP 2 — Team members
     if (step === 2) return (
       <div className="flex flex-col gap-5">
         <p className="text-fray-text-subtle text-sm">
-          Add up to <span className="text-fray-accent-primary font-semibold">3 additional members</span> (excluding you as leader).
+          Add up to <span className="text-fray-accent-primary font-semibold">3 additional members</span> (excluding leader).
         </p>
         {form.members.map((member, i) => (
           <div
@@ -256,14 +294,7 @@ export default function HackathonRegisterPage() {
             style={{ background: "rgba(34,211,238,0.03)" }}
           >
             <div className="flex items-center justify-between mb-1">
-              <span
-                className="text-xs font-semibold uppercase tracking-widest"
-                style={{
-                  background: "linear-gradient(to right, #06B6D4, #818CF8)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
+              <span className="text-xs font-semibold uppercase tracking-widest text-fray-accent-primary">
                 Member {i + 1}
               </span>
               {form.members.length > 1 && (
@@ -287,8 +318,7 @@ export default function HackathonRegisterPage() {
                   onChange={(e) => updateMember(i, "name", e.target.value)}
                   placeholder="Member's full name"
                   className="w-full bg-fray-bg-base border border-fray-border-soft rounded-lg px-4 py-2.5
-                  text-fray-text-primary text-sm placeholder:text-fray-border-mid
-                  focus:outline-none focus:border-fray-accent-primary/60 transition duration-200"
+                  text-fray-text-primary text-sm focus:outline-none focus:border-fray-accent-primary/60"
                 />
                 {errors[`member_name_${i}`] && (
                   <p className="text-red-400 text-xs mt-1">{errors[`member_name_${i}`]}</p>
@@ -304,8 +334,7 @@ export default function HackathonRegisterPage() {
                   onChange={(e) => updateMember(i, "email", e.target.value)}
                   placeholder="member@example.com"
                   className="w-full bg-fray-bg-base border border-fray-border-soft rounded-lg px-4 py-2.5
-                  text-fray-text-primary text-sm placeholder:text-fray-border-mid
-                  focus:outline-none focus:border-fray-accent-primary/60 transition duration-200"
+                  text-fray-text-primary text-sm focus:outline-none focus:border-fray-accent-primary/60"
                 />
                 {errors[`member_email_${i}`] && (
                   <p className="text-red-400 text-xs mt-1">{errors[`member_email_${i}`]}</p>
@@ -330,7 +359,6 @@ export default function HackathonRegisterPage() {
       </div>
     );
 
-    // STEP 3 — Project
     if (step === 3) return (
       <div className="flex flex-col gap-5">
         <div>
@@ -339,22 +367,14 @@ export default function HackathonRegisterPage() {
           </label>
           <select
             value={form.theme}
-            onChange={(e) => update("theme", e.target.value)}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) => update("theme", e.target.value)}
             className="w-full bg-fray-bg-base border border-fray-border-soft rounded-lg px-4 py-3
-            text-fray-text-primary text-sm
-            focus:outline-none focus:border-fray-accent-primary/60 transition duration-200
+            text-fray-text-primary text-sm focus:outline-none focus:border-fray-accent-primary/60
             appearance-none cursor-pointer"
-            style={{
-              boxShadow: form.theme ? "0 0 0 1px rgba(34,211,238,0.15)" : "none",
-            }}
           >
-            <option value="" disabled className="bg-fray-bg-base">
-              Choose a track...
-            </option>
+            <option value="" disabled>Choose a track...</option>
             {themes.map((t) => (
-              <option key={t.slug} value={t.slug} className="bg-fray-bg-base">
-                {t.title}
-              </option>
+              <option key={t.slug} value={t.slug}>{t.title}</option>
             ))}
           </select>
           {errors.theme && <p className="text-red-400 text-xs mt-1.5">{errors.theme}</p>}
@@ -366,16 +386,12 @@ export default function HackathonRegisterPage() {
           </label>
           <textarea
             value={form.projectIdea}
-            onChange={(e) => update("projectIdea", e.target.value)}
-            placeholder="Briefly describe your project idea, what problem it solves, and how you plan to build it..."
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => update("projectIdea", e.target.value)}
+            placeholder="Briefly describe your project..."
             rows={5}
             className="w-full bg-fray-bg-base border border-fray-border-soft rounded-lg px-4 py-3
-            text-fray-text-primary text-sm placeholder:text-fray-border-mid
-            focus:outline-none focus:border-fray-accent-primary/60
+            text-fray-text-primary text-sm focus:outline-none focus:border-fray-accent-primary/60
             transition duration-200 resize-none"
-            style={{
-              boxShadow: form.projectIdea ? "0 0 0 1px rgba(34,211,238,0.15)" : "none",
-            }}
           />
           {errors.projectIdea && (
             <p className="text-red-400 text-xs mt-1.5">{errors.projectIdea}</p>
@@ -387,8 +403,7 @@ export default function HackathonRegisterPage() {
 
   return (
     <div className="min-h-screen bg-fray-bg-base flex flex-col">
-
-      {/* Top bar */}
+   
       <div className="border-b border-fray-border-soft px-6 py-4">
         <button
           onClick={() => navigate("/")}
@@ -401,20 +416,12 @@ export default function HackathonRegisterPage() {
 
       <div className="flex-1 flex items-center justify-center px-4 py-16">
         <div className="w-full max-w-lg">
-
           {/* Page header */}
           <div className="text-center mb-10">
             <span className="text-fray-accent-primary text-sm font-semibold tracking-widest uppercase block mb-3">
               Fraylon Hackathon
             </span>
-            <h1
-              className="text-3xl md:text-4xl font-bold leading-tight"
-              style={{
-                background: "linear-gradient(to right, #06B6D4, #22D3EE, #818CF8)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
+            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
               Register Your Team
             </h1>
           </div>
@@ -422,116 +429,62 @@ export default function HackathonRegisterPage() {
           {/* Progress bar */}
           <div className="flex items-center gap-2 mb-8">
             {visibleSteps.map((label, i) => (
-              <div key={i} className="flex items-center gap-2 flex-1">
-                <div className="flex flex-col items-center gap-1 flex-1">
-                  <div
-                    className="w-full h-1 rounded-full transition-all duration-500"
-                    style={{
-                      background: i <= progressStep
-                        ? "linear-gradient(to right, #06B6D4, #818CF8)"
-                        : "rgba(31,41,55,1)",
-                    }}
-                  />
-                  <span
-                    className="text-xs transition-colors duration-300"
-                    style={{ color: i <= progressStep ? "#22D3EE" : "#94A3B8" }}
-                  >
-                    {label}
-                  </span>
-                </div>
+              <div key={i} className="flex flex-col items-center gap-1 flex-1">
+                <div
+                  className="w-full h-1 rounded-full transition-all duration-500"
+                  style={{
+                    background: i <= progressStep
+                      ? "linear-gradient(to right, #06B6D4, #818CF8)"
+                      : "rgba(31,41,55,1)",
+                  }}
+                />
+                <span
+                  className="text-[10px] md:text-xs transition-colors duration-300"
+                  style={{ color: i <= progressStep ? "#22D3EE" : "#94A3B8" }}
+                >
+                  {label}
+                </span>
               </div>
             ))}
           </div>
 
-          {/* Card */}
+      
           <motion.div
             key={step}
-            initial={{ opacity: 0, x: 24 }}
+            initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -24 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="relative bg-fray-bg-card border border-fray-border-soft rounded-2xl p-8 overflow-hidden"
-            style={{
-              boxShadow: "0 0 48px rgba(34,211,238,0.06), 0 0 0 1px rgba(34,211,238,0.05)",
-            }}
+            className="relative bg-fray-bg-card border border-fray-border-soft rounded-2xl p-8"
           >
-            {/* Top glowline */}
-            <div
-              className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px"
-              style={{
-                background: "linear-gradient(to right, transparent, #22D3EE, transparent)",
-              }}
-            />
-
-            {/* Step label */}
-            <p
-              className="text-xs font-semibold uppercase tracking-widest mb-6"
-              style={{
-                background: "linear-gradient(to right, #06B6D4, #818CF8)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
+            <p className="text-xs font-semibold uppercase tracking-widest mb-6 text-fray-accent-primary">
               Step {progressStep + 1} — {visibleSteps[progressStep]}
             </p>
 
             {renderStep()}
 
-            {/* Navigation */}
             <div className={`flex mt-8 gap-3 ${step > 0 ? "justify-between" : "justify-end"}`}>
               {step > 0 && (
                 <button
                   type="button"
                   onClick={back}
                   className="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-fray-border-mid
-                  text-fray-text-subtle hover:text-fray-accent-primary hover:border-fray-accent-primary/40
-                  transition duration-300 text-sm"
+                  text-fray-text-subtle hover:text-fray-accent-primary transition text-sm"
                 >
                   <ArrowLeft size={15} />
                   Back
                 </button>
               )}
 
-              {step < 3 ? (
-                <button
-                  type="button"
-                  onClick={next}
-                  className="flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-sm
-                  text-fray-bg-base hover:opacity-90 transition duration-300"
-                  style={{ background: "linear-gradient(to right, #06B6D4, #22D3EE, #818CF8)" }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.boxShadow =
-                      "0 0 0 1px rgba(34,211,238,0.5), 0 0 20px rgba(34,211,238,0.2)";
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.boxShadow = "none";
-                  }}
-                >
-                  Continue
-                  <ArrowRight size={15} />
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={handleSubmit}
-                  className="flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-sm
-                  text-fray-bg-base hover:opacity-90 transition duration-300"
-                  style={{ background: "linear-gradient(to right, #06B6D4, #22D3EE, #818CF8)" }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.boxShadow =
-                      "0 0 0 1px rgba(34,211,238,0.5), 0 0 20px rgba(34,211,238,0.2)";
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.boxShadow = "none";
-                  }}
-                >
-                  Submit Registration
-                  <ArrowRight size={15} />
-                </button>
-              )}
+              <button
+                type="button"
+                onClick={step < 3 ? next : handleSubmit}
+                className="flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-sm
+                text-fray-bg-base bg-gradient-to-r from-cyan-500 to-indigo-500 hover:opacity-90 transition"
+              >
+                {step < 3 ? "Continue" : "Submit Registration"}
+                <ArrowRight size={15} />
+              </button>
             </div>
           </motion.div>
-
         </div>
       </div>
     </div>

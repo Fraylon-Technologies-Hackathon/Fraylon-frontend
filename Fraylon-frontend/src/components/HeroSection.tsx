@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
-import { Button } from "../components/ui/button";
+import { Button } from "./ui/button";
 import { ArrowRight, Calendar, MapPin, Users } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const slides = [
   { src: "/slide1.jpg", overlay: "from-black/70 via-black/50 to-black/70" },
@@ -13,6 +14,7 @@ const slides = [
 const HeroSection = () => {
   const [current, setCurrent] = useState(0);
   const [loaded, setLoaded] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 100);
@@ -31,7 +33,7 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
 
-      {/* 🔥 Background Slides */}
+
       <div className="absolute inset-0">
         {slides.map((slide, i) => (
           <div
@@ -49,14 +51,14 @@ const HeroSection = () => {
         ))}
       </div>
 
-      {/* 🔥 CONTENT WRAPPER */}
+
       <div className="relative z-10 w-full">
         <div className="container-main min-h-screen flex items-center">
 
-          {/* TEXT BLOCK */}
+
           <div className="max-w-2xl w-full text-center lg:text-left">
 
-            {/* Badge */}
+
             <div
               className={`inline-flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur-md rounded-full px-4 py-2 mb-6 ${loaded ? "animate-fade-in" : "opacity-0"
                 }`}
@@ -67,7 +69,7 @@ const HeroSection = () => {
               </span>
             </div>
 
-            {/* Title */}
+
             <h1
               className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 ${loaded ? "animate-fade-in" : "opacity-0"
                 }`}
@@ -78,7 +80,7 @@ const HeroSection = () => {
                 SPHERE
               </span>            </h1>
 
-            {/* Subtitle */}
+
             <p
               className={`text-base md:text-lg text-white/70 mb-8 max-w-xl ${loaded ? "animate-fade-in" : "opacity-0"
                 }`}
@@ -87,7 +89,7 @@ const HeroSection = () => {
               collaborate globally.
             </p>
 
-            {/* Info Cards */}
+
             <div className="flex flex-wrap gap-4 mb-10 justify-center lg:justify-start">
               {[
                 { icon: <Calendar size={18} />, label: "March 15-17", sub: "2026" },
@@ -109,10 +111,11 @@ const HeroSection = () => {
               ))}
             </div>
 
-            {/* Buttons */}
+
             <div className="flex gap-4 justify-center lg:justify-start">
               <Button
                 size="lg"
+                onClick={() => navigate("/register")}
                 className="text-sm px-10 py-1 rounded-lg text-white
                     bg-linear-to-r from-teal-500 to-blue-500
                     hover:opacity-90 transition"
@@ -132,7 +135,6 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Indicators */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
         {slides.map((_, i) => (
           <button

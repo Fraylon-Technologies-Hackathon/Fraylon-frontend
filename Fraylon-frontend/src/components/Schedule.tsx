@@ -4,24 +4,21 @@ import { User } from "lucide-react";
 
 const Schedule = () => {
   return (
-    <section className="min-h-screen relative flex items-center justify-center px-6 py-20">
+    <section id="schedule" className="min-h-screen relative flex items-center justify-center px-6 py-20">
 
-      {/* 🌿 Background */}
       <div className="absolute inset-0 -z-10 bg-linear-to-br from-teal-50 via-cyan-50 to-blue-50" />
 
       <div className="container-main grid md:grid-cols-2 gap-12 items-start">
 
-        {/* LEFT PANEL */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
           className="relative p-1px rounded-3xl"
         >
-          {/* Glow */}
+         
           <div className="absolute inset-0 rounded-3xl bg-linear-to-r from-teal-400 via-blue-400 to-cyan-400 blur-xl opacity-40" />
 
-          {/* Card */}
           <div className="relative bg-white rounded-3xl p-6 shadow-xl">
 
             <h2 className="text-xl font-semibold mb-4 text-gray-900">
@@ -61,7 +58,7 @@ const Schedule = () => {
               </button>
             </form>
 
-            {/* Recent Meetings */}
+           
             <h3 className="text-lg font-semibold mt-8 mb-4 text-gray-900">
               Recent Meetings
             </h3>
@@ -86,17 +83,17 @@ const Schedule = () => {
           </div>
         </motion.div>
 
-        {/* RIGHT PANEL */}
+       
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
           className="relative p-[1px] rounded-3xl"
         >
-          {/* Glow */}
+       
           <div className="absolute inset-0 rounded-3xl bg-linear-to-r from-teal-400 via-blue-400 to-cyan-400 blur-xl opacity-40" />
 
-          {/* Card */}
+         
           <div className="relative bg-white rounded-3xl p-6 shadow-xl">
 
             <div className="flex justify-between items-center mb-6">
@@ -104,7 +101,7 @@ const Schedule = () => {
               <span className="text-sm text-gray-500">March 2026</span>
             </div>
 
-            {/* Calendar */}
+           
             <div className="grid grid-cols-7 gap-2 text-center text-sm mb-6">
               {["Mo","Tu","We","Th","Fr","Sa","Su"].map((day) => (
                 <div key={day} className="font-semibold text-gray-700">{day}</div>
@@ -124,7 +121,7 @@ const Schedule = () => {
               ))}
             </div>
 
-            {/* Today's Meetings */}
+          
             <h3 className="text-lg font-semibold mb-4 text-gray-900">
               Today's Meetings
             </h3>

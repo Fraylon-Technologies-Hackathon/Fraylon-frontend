@@ -5,10 +5,8 @@ const Footer = () => {
     <footer className="border-t border-gray-200 bg-white">
       <div className="max-w-7xl mx-auto px-6 py-16">
 
-        {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
-          {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1 text-center sm:text-left">
             <span className="text-xl font-bold bg-gradient-to-r from-teal-500 via-blue-500 to-cyan-500 bg-clip-text text-transparent">
               AI Hacksphere
@@ -19,7 +17,6 @@ const Footer = () => {
               collaboration and creativity.
             </p>
 
-            {/* Social Icons */}
             <div className="flex justify-center sm:justify-start gap-4 mt-5">
               {[Github, Twitter, Linkedin, Mail].map((Icon, i) => (
                 <a
@@ -36,7 +33,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Event */}
           <div className="text-center sm:text-left">
             <h4 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wider">
               Event
@@ -56,7 +52,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Resources */}
+        
           <div className="text-center sm:text-left">
             <h4 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wider">
               Resources
@@ -78,7 +74,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact */}
           <div className="text-center sm:text-left">
             <h4 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wider">
               Contact
@@ -98,7 +93,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom */}
+     
         <div className="border-t border-gray-200 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500 text-center md:text-left">
           
           <p>© 2026 AI Hacksphere. All rights reserved.</p>

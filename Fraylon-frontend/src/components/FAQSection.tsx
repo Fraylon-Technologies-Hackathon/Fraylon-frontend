@@ -4,7 +4,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "../components/ui/accordion";
+} from "./ui/accordion";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
@@ -54,13 +54,13 @@ const FAQSection = () => {
   return (
     <section id="faq" className="relative py-24 bg-[#f8fafc] overflow-hidden">
       
-      {/* Background Blobs */}
+    
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-teal-200/40 rounded-full blur-3xl -z-10 animate-pulse" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-200/40 rounded-full blur-3xl -z-10" />
 
       <div className="container px-4 mx-auto max-w-6xl">
         
-        {/* Header */}
+    
         <div className="text-center mb-16">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
@@ -80,10 +80,10 @@ const FAQSection = () => {
             <span className="text-teal-600">Look here.</span>
           </motion.h2>
 
-          {/* 🔍 Premium Search Bar */}
+       
           <div className="relative max-w-xl mx-auto mt-10 group">
             
-            {/* Glow */}
+      
             <div className="absolute -inset-1 bg-gradient-to-r from-teal-400 via-emerald-400 to-blue-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
 
             <div className="relative flex items-center bg-white rounded-2xl border border-slate-200 shadow-md focus-within:ring-2 focus-within:ring-teal-500 transition-all">
@@ -99,7 +99,6 @@ const FAQSection = () => {
                 text-slate-800 placeholder:text-slate-400 outline-none"
               />
 
-              {/* Clear button */}
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
@@ -114,7 +113,6 @@ const FAQSection = () => {
 
         <div className="grid lg:grid-cols-12 gap-12 items-start">
           
-          {/* Sidebar */}
           <div className="lg:col-span-4 space-y-6">
             <div className="bg-white/70 backdrop-blur-md p-3 rounded-3xl border border-white shadow-xl">
               <p className="px-4 py-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
@@ -164,7 +162,7 @@ const FAQSection = () => {
               })}
             </div>
 
-            {/* Support Card */}
+        
             <div className="relative overflow-hidden bg-slate-900 rounded-3xl p-8 text-white shadow-2xl group">
               <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-teal-500/20 rounded-full blur-2xl group-hover:bg-teal-500/40 transition-all" />
 
@@ -187,7 +185,7 @@ const FAQSection = () => {
             </div>
           </div>
 
-          {/* FAQ Content */}
+          
           <div className="lg:col-span-8">
             <AnimatePresence mode="wait">
               <motion.div
