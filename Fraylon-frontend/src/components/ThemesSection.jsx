@@ -22,21 +22,24 @@ export const themes = [
   {
     slug: "cybersecurity",
     title: "Cybersecurity",
-    description: "Develop tools that protect systems and detect threats.",
+    description:
+      "Develop tools that protect systems and detect threats.",
     icon: Shield,
     image: "/theme-cyber.jpg",
   },
   {
     slug: "blockchain",
     title: "Blockchain / Web3",
-    description: "Explore decentralized applications and smart contracts.",
+    description:
+      "Explore decentralized applications and smart contracts.",
     icon: Link2,
     image: "/theme-blockchain.jpg",
   },
   {
     slug: "open-innovation",
     title: "Open Innovation",
-    description: "Bring creative ideas that solve real-world challenges.",
+    description:
+      "Bring creative ideas that solve real-world challenges.",
     icon: Lightbulb,
     image: "/theme-open.jpg",
   },
@@ -88,10 +91,22 @@ const ThemeCard = ({ theme }) => {
             onClick={() => navigate(`/explore/${theme.slug}`)}
             style={{
               background: "linear-gradient(to right, #22D3EE, #38BDF8, #A5B4FC)",
+              transition:
+                "opacity 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease",
             }}
             className="mt-4 w-full text-xs px-3 py-2 rounded-md
-            hover:opacity-90
-            text-fray-bg-base font-semibold transition duration-300"
+            text-fray-bg-base font-semibold"
+            onMouseEnter={(e) => {
+              e.currentTarget.style.boxShadow =
+                "0 0 16px rgba(34,211,238,0.6), 0 0 32px rgba(56,189,248,0.3)";
+              e.currentTarget.style.transform = "scale(1.03)";
+              e.currentTarget.style.opacity = "0.92";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = "none";
+              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.opacity = "1";
+            }}
           >
             Explore
           </button>
@@ -120,6 +135,7 @@ const ThemesSection = () => {
     if (!isPausedRef.current) {
       el.scrollLeft += SPEED;
       const setWidth = el.scrollWidth / 3;
+
       if (el.scrollLeft >= setWidth * 2) {
         el.scrollLeft -= setWidth;
       }
@@ -131,13 +147,18 @@ const ThemesSection = () => {
   useEffect(() => {
     const el = sliderRef.current;
     if (!el) return;
+
     const setWidth = el.scrollWidth / 3;
     el.scrollLeft = setWidth;
+
     animFrameRef.current = requestAnimationFrame(autoScroll);
+
     return () => cancelAnimationFrame(animFrameRef.current);
   }, [autoScroll]);
 
-  const pauseScroll = () => { isPausedRef.current = true; };
+  const pauseScroll = () => {
+    isPausedRef.current = true;
+  };
 
   const onMouseDown = (e) => {
     isDraggingRef.current = true;
@@ -191,9 +212,11 @@ const ThemesSection = () => {
         <span className="text-fray-accent-primary text-sm font-semibold tracking-widest uppercase mb-3 block">
           Explore Tracks
         </span>
+
         <h2 className="text-3xl md:text-5xl font-bold text-fray-text-primary mb-4">
           Choose Your Challenge
         </h2>
+
         <p className="text-fray-text-subtle text-lg max-w-2xl mx-auto">
           Pick a theme and explore example problem statements.
         </p>
