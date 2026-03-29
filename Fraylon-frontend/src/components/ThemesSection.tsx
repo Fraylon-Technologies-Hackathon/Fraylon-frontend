@@ -32,21 +32,24 @@ export const themes: ThemeType[] = [
   {
     slug: "cybersecurity",
     title: "Cybersecurity",
-    description: "Develop tools that protect systems and detect threats.",
+    description:
+      "Develop tools that protect systems and detect threats.",
     icon: Shield,
     image: "/theme-cyber.jpg",
   },
   {
     slug: "blockchain",
     title: "Blockchain / Web3",
-    description: "Explore decentralized applications and smart contracts.",
+    description:
+      "Explore decentralized applications and smart contracts.",
     icon: Link2,
     image: "/theme-blockchain.jpg",
   },
   {
     slug: "open-innovation",
     title: "Open Innovation",
-    description: "Bring creative ideas that solve real-world challenges.",
+    description:
+      "Bring creative ideas that solve real-world challenges.",
     icon: Lightbulb,
     image: "/theme-open.jpg",
   },
