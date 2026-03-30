@@ -3,18 +3,22 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "./lib/utils (1)";
 
-const navLinks = [
+type NavLink = {
+  name: string;
+  href: string;
+};
+
+const navLinks: NavLink[] = [
   { name: "About", href: "#about" },
-  { name: "Tracks", href: "#tracks" },
+  { name: "Insights", href: "#insights" },
   { name: "Schedule", href: "#schedule" },
   { name: "Sponsors", href: "#sponsors" },
-  { name: "FAQ", href: "#faq" },
 ];
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [hovered, setHovered] = useState(null);
+  const [open, setOpen] = useState<boolean>(false);
+  const [scrolled, setScrolled] = useState<boolean>(false);
+  const [hovered, setHovered] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -22,15 +26,20 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  
-  const handleScrollTo = (href) => {
-    const target = document.querySelector(href);
-    if (target) {
-      const yOffset = -80; 
-      const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: "smooth" });
-      setOpen(false); 
-    }
+  const handleScrollTo = (href: string) => {
+    const id = href.replace("#", "");
+    const element = document.getElementById(id);
+
+    if (!element) return;
+
+    setOpen(false);
+
+    setTimeout(() => {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 300); 
   };
 
   return (
@@ -44,10 +53,8 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
 
-        {/* LEFT SPACE */}
         <div className="w-[120px]" />
 
-        {/* CENTER NAV (desktop) */}
         <div className="hidden md:flex items-center gap-6 px-4 py-2 rounded-full bg-white/70 backdrop-blur-lg border border-gray-200 shadow-sm">
           <span className="mr-4 text-lg font-bold bg-gradient-to-r from-teal-500 via-blue-500 to-cyan-500 bg-clip-text text-transparent">
             AI Hacksphere
@@ -73,7 +80,7 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* MOBILE MENU BUTTON */}
+      
         <div className="flex items-center justify-end w-[120px]">
           <button
             className="md:hidden p-2 bg-white/80 backdrop-blur rounded-full border border-gray-200"
@@ -84,7 +91,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* MOBILE MENU */}
       <AnimatePresence>
         {open && (
           <motion.div

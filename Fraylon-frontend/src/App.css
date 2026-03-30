@@ -1,12 +1,21 @@
-/* Full width root container */
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
 #root {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
 
-/* Optional: smooth scrolling for modern UI */
 html {
   scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 100px; /* prevents navbar overlap */
 }
 
 /* Remove default margins */

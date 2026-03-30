@@ -60,7 +60,7 @@ const HeroSection = () => {
         <div className="container-main min-h-screen flex items-center">
           <div className="max-w-2xl w-full text-center lg:text-left">
 
-            {/* Badge */}
+
             <div
               className={`inline-flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur-md rounded-full px-4 py-2 mb-6 ${
                 loaded ? "animate-fade-in" : "opacity-0"
@@ -72,7 +72,7 @@ const HeroSection = () => {
               </span>
             </div>
 
-            {/* Title */}
+
             <h1
               className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 ${
                 loaded ? "animate-fade-in" : "opacity-0"
@@ -85,7 +85,7 @@ const HeroSection = () => {
               </span>
             </h1>
 
-            {/* Subtitle */}
+
             <p
               className={`text-base md:text-lg text-white/70 mb-8 max-w-xl ${
                 loaded ? "animate-fade-in" : "opacity-0"
@@ -94,7 +94,7 @@ const HeroSection = () => {
               Join 500+ innovators to build next-gen AI solutions, compete, and collaborate globally.
             </p>
 
-            {/* Info Cards */}
+
             <div className="flex flex-wrap gap-4 mb-10 justify-center lg:justify-start">
               {[
                 { icon: <Calendar size={18} />, label: "March 15-17", sub: "2026" },
@@ -114,7 +114,7 @@ const HeroSection = () => {
               ))}
             </div>
 
-            {/* Buttons */}
+
             <div className="flex gap-4 justify-center lg:justify-start">
               <Button
                 size="lg"
@@ -139,7 +139,6 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Indicators */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
         {slides.map((_, i) => (
           <button

@@ -1,20 +1,19 @@
 import { motion } from "framer-motion";
 import React from "react";
 
-export default function WhyChooseAgency() {
+export default function WhySection() {
   return (
     <section className="py-28 relative overflow-hidden">
 
-      {/* 🌿 SAME BACKGROUND AS INSIGHTS */}
+     
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-teal-50 via-cyan-50 to-blue-50" />
 
-      {/* ✨ subtle glow (matches CTA vibe) */}
       <div className="absolute -top-32 -left-32 w-[300px] h-[300px] bg-teal-300/20 blur-[120px] rounded-full -z-10" />
       <div className="absolute -bottom-32 -right-32 w-[300px] h-[300px] bg-blue-300/20 blur-[120px] rounded-full -z-10" />
 
       <div className="max-w-7xl mx-auto px-6">
 
-        {/* Heading */}
+        
         <div className="mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
             Why Choose <span className="text-teal-500">Our Hackathon</span>
@@ -27,10 +26,10 @@ export default function WhyChooseAgency() {
           </p>
         </div>
 
-        {/* Grid */}
+        
         <div className="grid grid-cols-12 gap-6">
 
-          {/* 95 */}
+         
           <motion.div
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 60 }}
@@ -40,7 +39,7 @@ export default function WhyChooseAgency() {
             <p className="opacity-90 mt-2">Participant Satisfaction</p>
           </motion.div>
 
-          {/* 120 */}
+          
           <motion.div
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 60 }}
@@ -50,7 +49,7 @@ export default function WhyChooseAgency() {
             <p className="text-gray-600 mt-2">Projects Delivered</p>
           </motion.div>
 
-          {/* Image */}
+         
           <motion.div
             whileInView={{ opacity: 1, scale: 1 }}
             initial={{ opacity: 0, scale: .9 }}
@@ -63,7 +62,7 @@ export default function WhyChooseAgency() {
             />
           </motion.div>
 
-          {/* 24/7 */}
+         
           <motion.div
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 60 }}
@@ -73,7 +72,6 @@ export default function WhyChooseAgency() {
             <p className="text-gray-600 mt-2">Mentor Support</p>
           </motion.div>
 
-          {/* Quote */}
           <motion.div
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 60 }}
@@ -88,7 +86,6 @@ export default function WhyChooseAgency() {
             </div>
           </motion.div>
 
-          {/* 50 */}
           <motion.div
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 60 }}
@@ -98,7 +95,7 @@ export default function WhyChooseAgency() {
             <p className="text-black/70 mt-2">Startup Conversion</p>
           </motion.div>
 
-          {/* 10K */}
+          
           <motion.div
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 60 }}
@@ -108,7 +105,7 @@ export default function WhyChooseAgency() {
             <p className="text-gray-600 mt-2">Global Developers</p>
           </motion.div>
 
-          {/* 30 */}
+         
           <motion.div
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 60 }}

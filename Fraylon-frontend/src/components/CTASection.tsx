@@ -1,15 +1,18 @@
-import { Button } from "../components/ui/button";
+import { Button } from "./ui/button";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const CTASection = () => {
-  const ref = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLElement | null>(null);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
+      (entries: IntersectionObserverEntry[]) => {
+        const entry = entries[0];
+        if (entry && entry.isIntersecting) {
+          setIsVisible(true);
+        }
       },
       { threshold: 0.3 }
     );
@@ -30,37 +33,34 @@ const CTASection = () => {
             isVisible ? "animate-scale-in" : "opacity-0"
           }`}
         >
-          {/* White Card */}
           <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl shadow-xl px-6 sm:px-10 lg:px-16 py-14 sm:py-16 text-center">
 
-            {/* subtle glow */}
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-teal-300/30 rounded-full blur-3xl" />
             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-300/30 rounded-full blur-3xl" />
 
-            {/* Badge */}
+      
             <div className="inline-block mb-4 px-4 py-1 text-xs sm:text-sm rounded-full bg-teal-100 text-teal-700 font-medium">
               🚀 Ready to Transform Your Work?
             </div>
 
-            {/* Heading */}
+           
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
               Your Next <span className="text-teal-600">Breakthrough</span> <br />
               Starts Here
             </h2>
 
-            {/* Description */}
             <p className="text-gray-600 text-base sm:text-lg max-w-xl mx-auto mb-8 leading-relaxed">
               Join thousands of innovators building the future. Collaborate,
               create, and turn your ideas into reality faster than ever before.
             </p>
 
-            {/* Buttons */}
+     
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button
                 size="lg"
                 className="h-12 px-8 rounded-xl text-sm sm:text-base 
                 bg-gradient-to-r from-teal-500 to-blue-500 text-white
-                hover:opacity-90 transition-all duration-300 shadow-lg"
+                hover:opacity-90 transition-all duration-300 shadow-lg flex items-center gap-2"
               >
                 Start Your Journey
                 <ArrowRight size={18} />
@@ -70,21 +70,20 @@ const CTASection = () => {
                 variant="outline"
                 size="lg"
                 className="h-12 px-8 rounded-xl text-sm sm:text-base 
-                bg-gradient-to-r from-teal-500 to-blue-500 text-white
-                hover:opacity-90 transition-all duration-300 shadow-lg"
+                border-teal-500 text-teal-600 hover:bg-teal-50 transition-all duration-300"
               >
                 Watch Demo
               </Button>
             </div>
 
-            {/* Trust indicators */}
+           
             <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-gray-500">
               <span>👥 Trusted by 50,000+ creators</span>
               <span>⚡ 10x faster results</span>
               <span>🔒 100% secure</span>
             </div>
 
-            {/* Offer */}
+          
             <div className="mt-6 inline-block px-4 py-2 rounded-full bg-orange-100 text-orange-600 text-sm">
               🎁 Limited time: Get 3 months free
             </div>
